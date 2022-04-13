@@ -1,0 +1,10 @@
+有想到甚麼就直接編輯本檔案
+
+Page to code:
+
+1.Homepage首頁[runnable]
+2.loginpage登入畫面[WIP]
+3.registerpage創號畫面[null]
+4.settingscreen
+5.
+other....
