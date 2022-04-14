@@ -7,11 +7,10 @@ Android_Studio 必用功能：
 2.若發覺新下載的.dart檔無法import正確的Package/file，按這個給它跑。
 3.run main.dart(Default)。注：要先設好FlutterSDK的路徑且Emulater要開。
 4.Devices Manager，管虛擬機(Emulator)的，自己依電腦可承受'負擔'建立虛擬機(建議最新版)。
+5.File->Setting(Ctrl+Alt+S)
 
 
 VSCode也可以用
 (-_-)自己調設定、extendsion
 command prompt很累
 也沒法建虛擬機
-
-
