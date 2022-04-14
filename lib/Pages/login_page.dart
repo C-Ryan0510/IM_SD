@@ -21,6 +21,7 @@ class LoginPage extends StatelessWidget {
     this.context = context;
     //TextField Editer
     final nameController = TextEditingController();
+    var PassWordController = TextEditingController();
     //用戶資料(username,password)填寫的Textfield()
     final userField = TextField(
         controller: nameController,
@@ -31,7 +32,7 @@ class LoginPage extends StatelessWidget {
         ),
       );
     final passWordField = TextField(
-        controller: nameController,
+        controller: PassWordController,//diffent
         style: TextStyle(fontSize: 30),
         decoration: InputDecoration(
           labelText: '密碼',
@@ -39,29 +40,49 @@ class LoginPage extends StatelessWidget {
         ),
       );
     //登入button
-    final btn = RaisedButton(
-        child: Text('登入'),
-        /*onPressed()是button必需的*/
-        onPressed: () => _showSnackBar(nameController.text),// for test
-      );
-    //創建帳號/*need push to registerPage()*/
+    final btn = ElevatedButton(
+      child: Text('登入'),
+      /*onPressed()是button必需的*/
+      onPressed: () => _showSnackBar(nameController.text+'login'),// for test
+    );
+    //創建帳號/*need pop to registerPage()*/
     final sign_up = Text('創建帳號',
-        style: TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.bold,
-          color: Colors.blueAccent,
-        ),
-      );
+      style: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.bold,
+        color: Colors.blueAccent,
+      ),
+    );
 
-    return Scaffold(/*須改排版*/
-      drawer: Container(
-        child: Column(
-          children: <Widget>[
-            Container(child: userField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: passWordField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: btn, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: sign_up, margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),),
-          ],
+    return Scaffold(/*改排版 image maybe?*/
+      body: SafeArea(//no text in Edge of phone
+        minimum: const EdgeInsets.symmetric(vertical: 200, horizontal: 50),
+        child: Padding(//set position
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(child: userField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
+                Container(child: passWordField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
+                Container(child: btn, margin: EdgeInsets.symmetric(vertical: 10),),
+                Row(//sign up
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don\'t have an account?'),
+                    TextButton(
+                      onPressed: (() {
+                        // Navigator.pushNamed(
+                          //   context,
+                          //   MyRoutes.signUp,
+                          // );
+                      }),
+                      child: sign_up,
+                    ),
+                  ],
+                )
+              ]
+            ),
+          ),
         ),
       ),
     );
@@ -126,15 +147,35 @@ class _MyStatefulWidgetState extends State<LoginStateful> {
       ),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Column(
-          children: <Widget>[
-            Container(child: userField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: passWordField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: btn, margin: EdgeInsets.symmetric(vertical: 10),),
-            Container(child: sign_up, margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),),
-          ],
+    return Scaffold(/*改排版 image maybe?*/
+      body: SafeArea(//no text in Edge of phone
+        minimum: const EdgeInsets.symmetric(vertical: 200, horizontal: 50),
+        child: Padding(//set position
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Center(
+            child: Column(
+              children: <Widget>[
+                Container(child: userField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
+                Container(child: passWordField, width: 200, margin: EdgeInsets.symmetric(vertical: 10),),
+                Container(child: btn, margin: EdgeInsets.symmetric(vertical: 10),),
+                Row(//sign up
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don\'t have an account?'),
+                    TextButton(
+                      onPressed: (() {//no registerPage yet
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   MyRoutes.signUp,
+                        // );
+                      }),
+                      child: sign_up,
+                    ),
+                  ],
+                )
+              ]
+            ),
+          ),
         ),
       ),
     );
