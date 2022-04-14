@@ -72,9 +72,9 @@ class LoginPage extends StatelessWidget {
                     TextButton(
                       onPressed: (() {
                         // Navigator.pushNamed(
-                        //   context,
-                        //   MyRoutes.signUp,
-                        // );
+                          //   context,
+                          //   MyRoutes.signUp,
+                          // );
                       }),
                       child: sign_up,
                     ),
@@ -98,5 +98,10 @@ class LoginStateful extends StatefulWidget {
   State<LoginStateful> createState() => _MyStatefulWidgetState();
 }
 class _MyStatefulWidgetState extends State<LoginStateful> {
-//   ...
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+    );
+  }
 }
