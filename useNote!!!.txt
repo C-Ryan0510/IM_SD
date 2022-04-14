@@ -1,4 +1,6 @@
 
+先用flutter(界面-->functions)
+
 Android_Studio 必用功能：
 1.所有.dart(flutter)檔放在lib檔案夾裡。
 2.若發覺新下載的.dart檔無法import正確的Package/file，按這個給它跑。
@@ -11,3 +13,5 @@ VSCode也可以用
 (-_-)自己調設定、extendsion
 command prompt很累
 也沒法建虛擬機
+
+
