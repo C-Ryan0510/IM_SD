@@ -1,6 +1,6 @@
 平時有空就上來看
 
-先用flutter(界面-->functions)
+目標先用flutter(界面-->functions-->後端)
 
 Android_Studio 必用功能：
 1.所有.dart(flutter)檔放在lib檔案夾裡。
