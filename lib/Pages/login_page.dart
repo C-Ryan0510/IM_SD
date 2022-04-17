@@ -54,13 +54,13 @@ class LoginPage extends StatelessWidget {
       ),
     );
 
-    return Scaffold(/*改排版 image maybe?*/
+    return Scaffold(/*改再排版(image or animations)*/
       body: SafeArea(//no text in Edge of phone
         minimum: const EdgeInsets.symmetric(horizontal: 50),//pixel overflow cause by keyboard(if too large)
         child: Padding(//set position of box
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Center(
-            child: Column(
+            child: Column(//the box of all
               mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[//that box
                   Container(child: userField, alignment: Alignment.center, margin: EdgeInsets.symmetric(vertical: 10)),
