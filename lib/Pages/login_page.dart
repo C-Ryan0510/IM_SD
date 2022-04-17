@@ -101,19 +101,3 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-//useless?
-class LoginStateful extends StatefulWidget {
-  //constructor
-  const LoginStateful({Key? key}) : super(key: key);
-
-  @override//Must override
-  State<LoginStateful> createState() => _MyStatefulWidgetState();
-}
-class _MyStatefulWidgetState extends State<LoginStateful> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
-  }
-}
