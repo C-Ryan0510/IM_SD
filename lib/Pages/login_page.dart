@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
 
-//where ==>LoginPage()
-class LoginPage extends StatelessWidget {
-  // const LoginPage({Key? key}) : super(key: key);
-
-  late BuildContext context;
-
-  //show massage by Bar
-  void _showSnackBar(String msg) {
-    final snackBar = SnackBar(
-      content: Text(msg),
-      duration: Duration(seconds: 3),
-      backgroundColor: Colors.white,
-    );
-    Scaffold.of(context).showSnackBar(snackBar);
-  }
-
+//where ==>loginPage()
+class loginPage extends StatefulWidget{
   @override
-  Widget build(BuildContext context){
-    this.context = context;
+  State<loginPage> createState() => _login();
+}
+class _login extends State<loginPage> {
+  @override
+  Widget build(BuildContext context) {
     //TextField Editer
     var nameController = TextEditingController();
     var PassWordController = TextEditingController();
@@ -32,7 +21,7 @@ class LoginPage extends StatelessWidget {
       ),
     );
     final passWordField = TextField(
-      controller: PassWordController,//diffent
+      controller: PassWordController,//different
       style: TextStyle(fontSize: 30),
       decoration: InputDecoration(
         labelText: '密碼',
@@ -43,7 +32,7 @@ class LoginPage extends StatelessWidget {
     final btn = ElevatedButton(
       child: Text('登入'),
       /*onPressed()是button必需的*/
-      onPressed: () => _showSnackBar(nameController.text+'login'),// for test
+      onPressed: () => null//_showSnackBar(nameController.text+'login'),// for test
     );
     //創建帳號/*need pop to registerPage()*/
     final sign_up = Text('創建帳號',
@@ -123,5 +112,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-
-
