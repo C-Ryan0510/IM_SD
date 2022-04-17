@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context){
     this.context = context;
     //TextField Editer
-    final nameController = TextEditingController();
+    var nameController = TextEditingController();
     var PassWordController = TextEditingController();
     //用戶資料(username,password)填寫的Textfield()
     final userField = TextField(
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Center(
             child: Column(//the box of all
-              mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[//that box
                   Container(child: userField, alignment: Alignment.center, margin: EdgeInsets.symmetric(vertical: 10)),
                   Container(child: passWordField, alignment: Alignment.center, margin: EdgeInsets.symmetric(vertical: 10)),
@@ -85,13 +85,36 @@ class LoginPage extends StatelessWidget {
                         onPressed: (() {//to registerPage()
                           // Navigator.pushNamed(
                           //   context,
-                          //   MyRoutes.signUp,
+                          //
                           // );
                         }),
                         child: sign_up,
                       ),
                     ],
-                  )
+                  ),
+                  Row(//otherAccount
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [//其他登入方式
+                      ElevatedButton(
+                        onPressed: ((){
+
+                        }),
+                        child: Text('其他'),
+                      ),
+                      ElevatedButton(
+                        onPressed: ((){
+
+                        }),
+                        child: Text('其他'),
+                      ),
+                      ElevatedButton(
+                        onPressed: ((){
+
+                        }),
+                        child: Text('其他'),
+                      ),
+                    ],
+                  ),
                 ]
             ),
           ),
@@ -100,4 +123,5 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
 
