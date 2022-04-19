@@ -23,6 +23,11 @@ class HomeStateful extends StatefulWidget {
 }
 //custom NavigationBar widget
 class _MyStatefulWidgetState extends State<HomeStateful> {
+  // @override test iniState() from Stateful Widget
+  // void initState(){
+  //   super.initState();
+  //   throw ('Error!!');
+  // }
   int _selectedIndex = 0;
   //統一字體Style
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
