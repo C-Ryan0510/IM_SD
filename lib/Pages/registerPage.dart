@@ -1,12 +1,22 @@
 import 'package:flutter/material.dart';
 
 class registerPage extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
-
     //base data
-    final account = TextField();
-    final password = TextField();
+    final account = TextField(
+       decoration: InputDecoration(
+         border: OutlineInputBorder(),
+         hintText: '請輸入帳號',
+       ),
+    );
+    final password = TextField(
+      decoration: InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: '請輸入密碼',
+      ),
+    );
     final comfirmbtn = ElevatedButton(//any type of button
       onPressed: () {
         // save textfield to personal Data(table)
