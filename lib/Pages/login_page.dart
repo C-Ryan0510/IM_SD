@@ -11,30 +11,41 @@ class _login extends State<loginPage> {
     //TextField Editer
     var nameController = TextEditingController();
     var PassWordController = TextEditingController();
-    //用戶資料(username,password)填寫的Textfield()
+    /*用戶資料(username,password)填寫的Textfield()*/
     final userField = TextField(
       controller: nameController,
       style: TextStyle(fontSize: 30),
       decoration: InputDecoration(
-        labelText: '帳號',
-        labelStyle: TextStyle(fontSize: 30),
+        border: OutlineInputBorder(),
+        labelText: '輸入帳號',
+        labelStyle: TextStyle(fontSize: 20),
       ),
     );
     final passWordField = TextField(
       controller: PassWordController,//different
       style: TextStyle(fontSize: 30),
       decoration: InputDecoration(
-        labelText: '密碼',
-        labelStyle: TextStyle(fontSize: 30),
+        border: OutlineInputBorder(),
+        labelText: '輸入密碼',
+        labelStyle: TextStyle(fontSize: 20),
       ),
     );
     //登入button test
     final btn = ElevatedButton(
       child: Text('登入'),
       /*onPressed()是button必需的*/
-      onPressed: () => null//_showSnackBar(nameController.text+'login'),// for test
+      // onPressed: () => _showSnackBar(nameController.text+'login'),// for test
+      onPressed: () => null,
     );
-    //創建帳號/*need pop to registerPage()*/
+    //忘記密碼text
+    final forgot  = Text('不記得密碼了嗎?',
+      style: TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
+        color: Colors.blueAccent,
+      ),
+    );
+    //創建帳號text
     final sign_up = Text('創建帳號',
       style: TextStyle(
         fontSize: 12,
@@ -58,10 +69,10 @@ class _login extends State<loginPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       TextButton(
-                        onPressed: (() {//to forgotPassword
+                        onPressed: (() {//to forgotPassword()
 
                         }),
-                        child: Text('不記得密碼了嗎?', style: TextStyle(fontSize: 18),),
+                        child: forgot,
                       ),
                       btn,//alignment: Alignment.centerRight, margin: EdgeInsets.symmetric(vertical: 10),
                     ],
@@ -81,9 +92,9 @@ class _login extends State<loginPage> {
                       ),
                     ],
                   ),
-                  Row(//otherAccount
+                  Row(//otherAccount其他登入方式
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [//其他登入方式
+                    children: [
                       ElevatedButton(
                         onPressed: ((){
 
@@ -94,13 +105,13 @@ class _login extends State<loginPage> {
                         onPressed: ((){
 
                         }),
-                        child: Text('其他'),
+                        child: Text('帳戶'),
                       ),
                       ElevatedButton(
                         onPressed: ((){
 
                         }),
-                        child: Text('其他'),
+                        child: Text('登入'),
                       ),
                     ],
                   ),
