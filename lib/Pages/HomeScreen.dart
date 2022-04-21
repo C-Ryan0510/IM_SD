@@ -25,30 +25,23 @@ class HomeStateful extends StatefulWidget {
 class _MyStatefulWidgetState extends State<HomeStateful> {
   //check State of availability(for SideBar)
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  //check State of availability(NavigationBar)
+  //Set State of availability&index(for NavigationBar)
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() { _selectedIndex = index;});
   }
   int _selectedIndex = 0;
   //統一字體Style
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  //點擊動作(get index of list)
-
   //List of Widgets when Navigation Bars(clicked)
   static const List<Widget> _widgetOptions = <Widget>[
     /*這裡只是Text()改這裡... 加東西 OR go to other pages*/
     Text('0: 首頁',
       style: optionStyle,
-    ),
-    Text('1: 數據',
+    ),Text('1: 數據',
       style: optionStyle,
-    ),
-    Text('2: 分析',
+    ), Text('2: 分析',
       style: optionStyle,
-    ),
-    /*看要不要再多*/
+    ),/*看要不要再多*/
     Text('3: 設定',
       style: optionStyle,
     ),
