@@ -66,7 +66,13 @@ class _MyStatefulWidgetState extends State<HomeStateful> {
           children: [
             DrawerHeader(child: Container(color: Colors.blue,)),//Image
             Divider(thickness: 30,),//thicc
-            ListTile(title: Text("text"),),
+            ListTile(/*當此為範例取*/
+              leading: Icon(Icons.account_circle),
+              title: Text("帳戶管理"),
+              onTap: (){//-->AccountPage()
+                // Navigator.push(context,route);
+              },
+            ),
             Divider(thickness: 2,),
 
           ],
