@@ -25,35 +25,71 @@ class HomeStateful extends StatefulWidget {
 class _MyStatefulWidgetState extends State<HomeStateful> {
   //check State of availability(for SideBar)
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  //Set State of availability&index(for NavigationBar)
-  void _onItemTapped(int index) {
-    setState(() { _selectedIndex = index;});
-  }
-  int _selectedIndex = 0;
   //統一字體Style
   static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  //List of Widgets when Navigation Bars(clicked)
-  static const List<Widget> _widgetOptions = <Widget>[
-    /*這裡只是Text()改這裡... 加東西 OR go to other pages*/
-    Text('0: 首頁',
-      style: optionStyle,
-    ),Text('1: 數據',
-      style: optionStyle,
-    ), Text('2: 分析',
-      style: optionStyle,
-    ),/*看要不要再多*/
-    Text('3: 設定',
-      style: optionStyle,
-    ),
-  ];
+  //統一裝飾(for test)
+  static BoxDecoration testDecor = BoxDecoration(color: Colors.blueGrey, border: Border.all(color: Colors.lightBlue, width: 5.0,), borderRadius: BorderRadius.circular(12),);
+  /*再寫一個(for 美工)*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       body: Stack(//to contain multiple bodys
         children: [
-          Center(//Index show on Page canter(NavigationBar)
-            child: _widgetOptions.elementAt(_selectedIndex),
+          SafeArea(
+            child: SizedBox(
+              child: GridView.count(/*it is able Scroll down if fill the Screen*/
+                crossAxisCount: 2,//make it two Column
+                padding: const EdgeInsets.all(30),//Edge space
+                mainAxisSpacing: 30,//space between them
+                crossAxisSpacing: 20,
+                children: [
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test1',style: optionStyle,),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test2',style: optionStyle),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test3',style: optionStyle),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test4',style: optionStyle),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test5',style: optionStyle),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('test6',style: optionStyle),
+                    ),
+                  ),
+                  Container(
+                    decoration: testDecor,
+                    child: Center(
+                      child: Text('scorll test',style: optionStyle),
+                    ),
+                  ),
+                  /*add more by the number of functions*/
+                ],
+              ),
+            ),
           ),
           IconButton(//show SideBar without (TOP)AppBar
             icon: Icon(Icons.menu,color: Colors.black,),
@@ -74,32 +110,25 @@ class _MyStatefulWidgetState extends State<HomeStateful> {
               },
             ),
             Divider(thickness: 2,),
-
+            ListTile(
+              leading: Icon(Icons.account_box_outlined),
+              title: Text("客服?"),
+              onTap: (){//
+                // Navigator.push(context,route);
+              },
+            ),
+            Divider(thickness: 2,),
+            ListTile(
+              leading: Icon(Icons.details),
+              title: Text("coming soon..."),
+              onTap: (){//-->
+                // Navigator.push(context,route);
+              },
+            ),
+            Divider(thickness: 2,),
+            /*...add more*/
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[/*要有甚麼*/
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '首頁',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.data_saver_on),
-            label: '數據',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: '分析',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: '設定',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
       ),
     );
   }
