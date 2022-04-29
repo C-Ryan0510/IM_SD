@@ -31,6 +31,9 @@ class registerPage extends StatelessWidget{
 
 
     return Scaffold(
+      appBar: AppBar(//Back Arrow/*maybe use like sidebar @HomeScreen()*/
+        title: const Text('lol'),
+      ),
       body: SafeArea(//no text in Edge of phone
         minimum: const EdgeInsets.symmetric(horizontal: 50),//pixel overflow cause by keyboard(if too large)
         child: Padding(//set position of box
