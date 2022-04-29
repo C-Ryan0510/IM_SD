@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/Pages/registerPage.dart';
 
 //where ==>loginPage()
 class loginPage extends StatefulWidget{
@@ -83,35 +84,12 @@ class _login extends State<loginPage> {
                       const Text('尚未建立帳戶?'),
                       TextButton(
                         onPressed: (() {//to registerPage()
-                          // Navigator.pushNamed(
-                          //   context,
-                          //
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => registerPage()),
+                          );
                         }),
                         child: sign_up,
-                      ),
-                    ],
-                  ),
-                  Row(//otherAccount其他登入方式
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: ((){
-
-                        }),
-                        child: Text('其他'),
-                      ),
-                      ElevatedButton(
-                        onPressed: ((){
-
-                        }),
-                        child: Text('帳戶'),
-                      ),
-                      ElevatedButton(
-                        onPressed: ((){
-
-                        }),
-                        child: Text('登入'),
                       ),
                     ],
                   ),
