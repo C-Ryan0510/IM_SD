@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/Firebase/authentication.dart';
 import 'package:untitled/Pages/registerPage.dart';
 
 //where ==>loginPage()
 class loginPage extends StatefulWidget{
+  const loginPage({Key?key}) : super(key:key);
+
   @override
   State<loginPage> createState() => _login();
 }
 class _login extends State<loginPage> {
+  //TextField Editer
+  var nameController = TextEditingController();
+  var PassWordController = TextEditingController();
+  @override
+  void dispose() {
+    nameController.dispose();
+    PassWordController.dispose();
+    super.dispose();
+  }
+  String getEmail(){
+    return nameController.text;
+  }
+  TextEditingController getPassword(){
+    return PassWordController;
+  }
   @override
   Widget build(BuildContext context) {
-    //TextField Editer
-    var nameController = TextEditingController();
-    var PassWordController = TextEditingController();
+
     /*用戶資料(username,password)填寫的Textfield()*/
     final userField = TextField(
       controller: nameController,
@@ -35,7 +51,6 @@ class _login extends State<loginPage> {
     final btn = ElevatedButton(
       child: Text('登入'),
       /*onPressed()是button必需的*/
-      // onPressed: () => _showSnackBar(nameController.text+'login'),// for test
       onPressed: () => null,
     );
     //忘記密碼text
@@ -84,10 +99,7 @@ class _login extends State<loginPage> {
                       const Text('尚未建立帳戶?'),
                       TextButton(
                         onPressed: (() {//to registerPage()
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => registerPage()),
-                          );
+                          Navigator.pushNamed(context, '/register',);
                         }),
                         child: sign_up,
                       ),
