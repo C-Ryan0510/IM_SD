@@ -1,28 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 //main()==>HomeScreen()
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context){
-    return const MaterialApp(
-      home: HomeStateful(),
-    );
-  }
-}
-
-//網址： https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html
-//HomePage() ==> HomeStateful
-//custom StatefulWidget class
-class HomeStateful extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   //constructor
-  const HomeStateful({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
   @override//Must override
-  State<HomeStateful> createState() => _MyStatefulWidgetState();
+  State<HomeScreen> createState() => _HomeStateful();
 }
-//custom NavigationBar widget
-class _MyStatefulWidgetState extends State<HomeStateful> {
+class _HomeStateful extends State<HomeScreen> {
   //check State of availability(for SideBar)
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   //統一字體Style
@@ -32,6 +18,7 @@ class _MyStatefulWidgetState extends State<HomeStateful> {
   /*再寫一個(for 美工)*/
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!;//當前登入帳戶for info
     return Scaffold(
       key: _scaffoldKey,
       body: Stack(//to contain multiple bodys
@@ -100,7 +87,22 @@ class _MyStatefulWidgetState extends State<HomeStateful> {
       drawer: Drawer(//SideBar
         child:  ListView(
           children: [
-            DrawerHeader(child: Container(color: Colors.blue,)),//Image
+            DrawerHeader(/*account detail*/
+                child: Container(
+                  child: Row(
+                    children: [
+                      Text('Sign In As',
+                      style: TextStyle(fontSize: 20),
+                      ),
+                      SizedBox(width: 10),
+                      Text(user.email!,
+                        style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ),
+                  color: Colors.blue,
+                )
+            ),
             Divider(thickness: 30,),//thicc
             ListTile(/*當此為範例取*/
               leading: Icon(Icons.account_circle),
@@ -116,6 +118,12 @@ class _MyStatefulWidgetState extends State<HomeStateful> {
               onTap: (){//
                 // Navigator.push(context,route);
               },
+            ),
+            Divider(thickness: 2,),
+            ListTile(
+              leading: Icon(Icons.login),
+              title: Text("登出帳號"),
+              onTap: () => FirebaseAuth.instance.signOut(),
             ),
             Divider(thickness: 2,),
             ListTile(
