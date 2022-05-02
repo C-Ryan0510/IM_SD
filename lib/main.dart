@@ -1,10 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled/Pages/HomeScreen.dart';
-import 'package:untitled/Pages/login_page.dart';
-import 'Pages/splash.dart';
-import 'Pages/registerPage.dart';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:untitled/utils.dart';
+import 'package:untitled/accountAuth.dart';
+import 'Pages/HomeScreen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,17 +21,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
     debugShowCheckedModeBanner: false,
+    scaffoldMessengerKey: Utils.messengerKey,
     navigatorKey: navigatorKey,//GlobalKey
     title: '健康照護',
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: MainScreen(),
+    home: MainScreen(),//顯現主頁
     // initialRoute: '/',
-    // routes: { //導覽頁面路徑
-    //   //to registerPage 'register'
-    //   '/register': (BuildContext context) => registerPage(),
-    // }
+    // routes: { //導覽頁面路徑}
   );
 }
 
@@ -50,7 +49,7 @@ class MainScreen extends StatelessWidget {
           }else if(snapshot.hasData){
             return HomeScreen();
           } else {//if press sign out or hasn't sign in
-            return loginPage();
+            return AuthPageSwitch();
           }
         }
     ),
