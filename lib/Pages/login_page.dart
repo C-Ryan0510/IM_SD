@@ -1,18 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/Pages/ForgotPasswordPage.dart';
 import 'package:untitled/main.dart';
 import 'package:untitled/utils.dart';
 
 //where ==>loginPage()
 class loginPage extends StatefulWidget{
-  final VoidCallback onClickedSignUp;
+  final Function togglePage;
 
-  const loginPage({
-    Key?key, required this.onClickedSignUp,
-  }) : super(key:key);
+  loginPage({ required this.togglePage});
 
   @override
   State<loginPage> createState() => _login();
@@ -21,6 +19,8 @@ class _login extends State<loginPage> {
   //用戶資料(username,password)填寫的Textfield()//須放在widget內才能用
   final mailController = TextEditingController();
   final PassWordController = TextEditingController();
+
+
   @override
   void dispose() {
     mailController.dispose();
@@ -36,6 +36,7 @@ class _login extends State<loginPage> {
         child: Form(
           child: Column(//the box of all
               mainAxisAlignment: MainAxisAlignment.center,
+              /*Image*/
               children: <Widget>[//that box
                 Container(//name or email box
                     child: TextFormField(
@@ -43,7 +44,7 @@ class _login extends State<loginPage> {
                       textInputAction: TextInputAction.next,//next textfield
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: '輸入帳號',
+                        labelText: '輸入電子信箱',
                       ),
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator:(email)=>email!=null&&!EmailValidator.validate(email)? '請輸入正確mail格式':null,
@@ -70,12 +71,14 @@ class _login extends State<loginPage> {
                     TextButton(
                       child: Text('不記得密碼了嗎?',
                         style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                          fontSize: 16,
                           color: Colors.blueAccent,
                         ),
-                      ),//to Forget()
-                      onPressed: (){},
+                      ),
+                      onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ForgotPage(),//to Forgot()
+                      )),
                     ),
                     ElevatedButton(
                       child: Text('登入'),
@@ -83,17 +86,20 @@ class _login extends State<loginPage> {
                     ),
                   ],
                 ),
-                RichText(//sign up
-                  text: TextSpan(
-                    style: TextStyle(fontSize: 12,color: Colors.black),
-                    text: '尚未建立帳戶?',
+                Container(
+                  child: Row(//sign up
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      TextSpan(text: '               ',),
-                      TextSpan(
-                        recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
-                        text: '創建新的帳號',
-                        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),),
-                    ],
+                      Text('尚未建立帳戶?',style: TextStyle(fontSize: 12,color: Colors.black),),
+                      GestureDetector(//byPass a false(value) to accountAuth()
+                        onTap: () { widget.togglePage();},//Switch registerPage
+                        child: Text('創建新的帳號',
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),
+                        ),
+                      ),
+                        // TextSpan(recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
+                        // text: '創建新的帳號',
+                    ]
                   ),
                 ),
               ]
@@ -123,3 +129,4 @@ class _login extends State<loginPage> {
     navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }
+
