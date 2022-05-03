@@ -1,16 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/main.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:untitled/utils.dart';
 
 class registerPage extends StatefulWidget{
-  final Function() onClickedSignIn;
+  final Function togglePage;
 
-  const registerPage({
-    Key?key, required this.onClickedSignIn,
-  }) : super(key:key);
+  registerPage({ required this.togglePage,});
 
   @override
   State<StatefulWidget> createState() => _registerState();
@@ -84,17 +81,18 @@ class _registerState extends State<registerPage>{
                           )
                         ],
                       ),
-                      RichText(//sign up
-                        text: TextSpan(
-                          style: TextStyle(fontSize: 12,color: Colors.black),
-                          text: '已經有帳戶了?',
-                          children: [
-                            TextSpan(text: '               ',),
-                            TextSpan(
-                              recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignIn,
-                              text: '返回登入畫面',
-                              style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),),
-                          ],
+                      Container(
+                        child: Row(//sign up
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text('已經有帳戶了?',style: TextStyle(fontSize: 12,color: Colors.black),),
+                              GestureDetector(
+                                onTap: () { widget.togglePage();},//Switch to loginPage()
+                                child: Text('返回登入畫面',
+                                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),
+                                ),
+                              ),
+                            ]
                         ),
                       ),
                     ]
