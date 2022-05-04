@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:untitled/utils.dart';
 import 'package:untitled/accountAuth.dart';
 import 'Pages/HomeScreen.dart';
+import 'Pages/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,15 +28,15 @@ class MyApp extends StatelessWidget {
     theme: ThemeData(
       primarySwatch: Colors.blue,
     ),
-    home: MainScreen(),//顯現主頁
+    home: Splash(),//顯現主頁
     // initialRoute: '/',
     // routes: { //導覽頁面路徑}
   );
 }
 
+//主要導覽頁
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context)
   => Scaffold(/*此代替導覽路徑*/
