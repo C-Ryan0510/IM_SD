@@ -9,11 +9,10 @@ class AuthPageSwitch extends StatefulWidget {
   State<AuthPageSwitch> createState() => _accountAuthState();
 }
 
-class _accountAuthState extends State<AuthPageSwitch> {
+class _accountAuthState extends State<AuthPageSwitch> with SingleTickerProviderStateMixin{
   bool TogglePage = true;
-
   void toggle() => setState(() => TogglePage = !TogglePage);
-
   @override
-  Widget build(BuildContext context) => TogglePage? loginPage(onClickedSignUp:toggle):registerPage(onClickedSignIn:toggle);
+  Widget build(BuildContext context)
+  =>TogglePage? loginPage(togglePage:toggle):registerPage(togglePage:toggle);
 }
