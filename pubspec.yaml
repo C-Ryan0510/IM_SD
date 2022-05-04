@@ -33,15 +33,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   # self import (Check Versions PLZ)
-  flutter_native_splash: ^2.1.6
   firebase_core: ^1.15.0
   firebase_auth: ^3.3.16
   cloud_firestore: ^3.1.13
   email_validator: ^2.0.1
-flutter_native_splash:
-  color: "#7CE577" # white background
-  image: ^3.1.3 # asset/image
-
 
 dev_dependencies:
   flutter_test:
@@ -66,9 +61,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - healthcare.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
