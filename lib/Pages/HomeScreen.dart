@@ -15,70 +15,85 @@ class _HomeStateful extends State<HomeScreen> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //統一字體美工(for now)
-  static const TextStyle optionStyle = TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static BoxDecoration testDecor = BoxDecoration(color: Colors.black12, border: Border.all(color: Colors.lightBlue, width: 5.0,), borderRadius: BorderRadius.circular(12),);
+  static const TextStyle optionStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+  static BoxDecoration testDecor = BoxDecoration(color: Colors.black12/*, border: Border.all(color: Colors.purple, width: 1.0,)*/,);
 
   //Bodys(配合底部導覽進行轉換)
-  final Screens = [//Normal widget or Pages()
+  final Screens = [ /*Normal widget or Pages()*/
     // ForgotPage(),// test
     /*記錄*/
-    Center(child: Text('RECORD coming soon...',style: TextStyle(fontSize: 30),),),
-    /*主頁*/
-    Center(child: SafeArea(
-          child: SizedBox(
-            child: GridView.count(/*it is able Scroll down if fill the Screen*/
-              crossAxisCount: 2,//make it two Column
-              padding: const EdgeInsets.all(30),//Edge space
-              mainAxisSpacing: 30,//space between them
-              crossAxisSpacing: 20,
-              children: [
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('最新通知',style: optionStyle,),
-                  ),
+    Center(
+      child: SafeArea(
+        child: SizedBox(
+          child: GridView.count(/*it is able Scroll down if fill the Screen*/
+            crossAxisCount: 3,//make it two Column
+            padding: const EdgeInsets.all(30),//Edge space
+            mainAxisSpacing: 70,//space between them
+            crossAxisSpacing: 20,
+            children: [
+              Container(
+                child: Column(
+                  children: [
+                    Image.asset('lib/asset/healthcare.png',fit: BoxFit.fill,),
+                    SizedBox(height: 5,),
+                    Text('最新通知',style: optionStyle,),
+                  ],
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('健康諮詢',style: optionStyle),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('最新通知',style: optionStyle,),
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('聊天',style: optionStyle),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('健康諮詢',style: optionStyle),
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('風險預防',style: optionStyle),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('聊天',style: optionStyle),
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('我的報告',style: optionStyle),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('風險預防',style: optionStyle),
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: Center(
-                    child: Text('相關設備',style: optionStyle),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('我的報告',style: optionStyle),
                 ),
-                Container(
-                  decoration: testDecor,
-                  child: const Center(
-                    child: Text('Coming Soon!',style: optionStyle,textAlign: TextAlign.center,),
-                  ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: Center(
+                  child: Text('相關設備',style: optionStyle),
                 ),
-                /*add more by the number of functions*/
-              ],
-            ),
+              ),
+              Container(
+                decoration: testDecor,
+                child: const Center(
+                  child: Text('Coming Soon!',style: optionStyle,textAlign: TextAlign.center,),
+                ),
+              ),
+              /*add more by the number of functions*/
+            ],
           ),
         ),
+      ),
+    ),
+    /*主頁*/
+    Column(
+      children: [
+        Positioned(height: 100,child: Text('健康報告',style: TextStyle(fontSize: 30),),),
+        Positioned(child: Text('最新消息',style: TextStyle(fontSize: 30),),),
+      ],
     ),
     /*健康*/
     Center(child: Text('HEALTH I don\'t care!!',style: TextStyle(fontSize: 30),),),
@@ -89,6 +104,7 @@ class _HomeStateful extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;//當前登入帳戶for info
     return Scaffold(
+      backgroundColor: Colors.amber,
       key: _scaffoldKey,
       body: Stack(
         children: [
@@ -152,6 +168,8 @@ class _HomeStateful extends State<HomeScreen> {
           ],
         ),
       ),
+
+      /*origin*/
       bottomNavigationBar: NavigationBarTheme(//底部導覽
         data: NavigationBarThemeData(
           height: 75,
@@ -184,20 +202,6 @@ class _HomeStateful extends State<HomeScreen> {
               label: '健康',
             ),
           ],
-          // items: [
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Icons.book_outlined),
-          //     label: '紀錄',
-          //   ),
-          //    BottomNavigationBarItem(
-          //     icon: Icon(Icons.home_outlined),
-          //     label: '主頁',
-          //   ),
-          //   BottomNavigationBarItem(
-          //     icon: Icon(Icons.health_and_safety_outlined),
-          //     label: '健康',
-          //   ),
-          // ],
         ),
       ),
     );
