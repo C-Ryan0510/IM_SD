@@ -29,82 +29,71 @@ class _login extends State<loginPage> {
   }
   @override
   Widget build(BuildContext context) => Scaffold(/*改再排版(image or animations)*/
-    body: SafeArea(//no text in Edge of phone
-      minimum: const EdgeInsets.symmetric(horizontal: 50),//pixel overflow cause by keyboard(if too large)
-      child: Padding(//set position of box
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Form(
-          child: Column(//the box of all
-              mainAxisAlignment: MainAxisAlignment.center,
-              /*Image*/
-              children: <Widget>[//that box
-                Container(//name or email box
-                    child: TextFormField(
-                      controller: mailController,
-                      textInputAction: TextInputAction.next,//next textfield
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: '輸入電子信箱',
-                      ),
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      validator:(email)=>email!=null&&!EmailValidator.validate(email)? '請輸入正確mail格式':null,
-                    ),
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(vertical: 10)
+    resizeToAvoidBottomInset: false,
+    backgroundColor: Colors.greenAccent,
+    body: Center(
+      child: ListView(
+        shrinkWrap: true,
+        reverse: true,
+        padding: EdgeInsets.all(32),
+        children: [
+          Image.asset('lib/asset/healthcare.png',scale: 2,),
+          Positioned(child: Text('帳號登入',style: TextStyle(fontSize: 30),),),
+          SizedBox(height: 16,),
+          TextFormField(
+            controller: mailController,
+            textInputAction: TextInputAction.next,//next textfield
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: '輸入電子信箱',
+            ),
+          ),
+          SizedBox(height: 16,),
+          TextFormField(
+              controller: PassWordController,
+              textInputAction: TextInputAction.done,//deselect textfield
+              obscureText: true,//hide PassWord
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: '輸入密碼',
+              )
+          ),
+          SizedBox(height: 16,),
+          Row(//forgot password & sign_in btn
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                child: Text('不記得密碼了嗎?',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 16,
+                    color: Colors.blueAccent,
+                  ),
                 ),
-                Container(
-                    child: TextFormField(
-                        controller: PassWordController,
-                        textInputAction: TextInputAction.done,//deselect textfield
-                        obscureText: true,//hide PassWord
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: '輸入密碼',
-                        )
-                    ),
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.symmetric(vertical: 10)
-                ),
-                Row(//forgot password & sign_in btn
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextButton(
-                      child: Text('不記得密碼了嗎?',
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 16,
-                          color: Colors.blueAccent,
-                        ),
-                      ),
-                      onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ForgotPage(),//to Forgot()
-                      )),
-                    ),
-                    ElevatedButton(
-                      child: Text('登入'),
-                      onPressed: signIn,/*2@main.dart return HomeScreen()!*/
-                    ),
-                  ],
-                ),
-                Container(
-                  child: Row(//sign up
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text('尚未建立帳戶?',style: TextStyle(fontSize: 12,color: Colors.black),),
-                      GestureDetector(//byPass a false(value) to accountAuth()
-                        onTap: () { widget.togglePage();},//Switch registerPage
-                        child: Text('創建新的帳號',
-                          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),
-                        ),
-                      ),
-                        // TextSpan(recognizer: TapGestureRecognizer()..onTap = widget.onClickedSignUp,
-                        // text: '創建新的帳號',
-                    ]
+                onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ForgotPage(),//to Forgot()
+                )),
+              ),
+              ElevatedButton(
+                child: Text('登入'),
+                onPressed: signIn,/*@main.dart return HomeScreen()!*/
+              ),
+            ],
+          ),
+          SizedBox(height: 10,),
+          Row(//sign up
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('尚未建立帳戶?',style: TextStyle(fontSize: 12,color: Colors.black),),
+                GestureDetector(//byPass a false(value) to accountAuth()
+                  onTap: () { widget.togglePage();},//Switch registerPage
+                  child: Text('創建新的帳號',
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent,),
                   ),
                 ),
               ]
           ),
-        ),
+        ].reversed.toList(),
       ),
     ),
   );
