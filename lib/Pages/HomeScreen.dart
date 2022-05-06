@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/widgets.dart';
 import 'ForgotPasswordPage.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeStateful extends State<HomeScreen> {
   //check State of availability
-  int _selectedIndex = 1;//注:此數字不可存在於超出(Screens、NavigationBar)最大數-1[like index of Array]
+  int _selectedIndex = 0;
+  // int _selectedIndex = 1;//注:此數字不可存在於超出(Screens、NavigationBar)最大數-1[like index of Array]
+  // int _selectedIndex = 2;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   //統一字體美工(for now)
@@ -22,71 +25,88 @@ class _HomeStateful extends State<HomeScreen> {
   final Screens = [ /*Normal widget or Pages()*/
     // ForgotPage(),// test
     /*記錄*/
-    Center(
-      child: SafeArea(
-        child: SizedBox(
-          child: GridView.count(/*it is able Scroll down if fill the Screen*/
-            crossAxisCount: 3,//make it two Column
-            padding: const EdgeInsets.all(30),//Edge space
-            mainAxisSpacing: 70,//space between them
-            crossAxisSpacing: 20,
-            children: [
-              Container(
-                child: Column(
-                  children: [
-                    Image.asset('lib/asset/healthcare.png',fit: BoxFit.fill,),
-                    SizedBox(height: 5,),
-                    Text('最新通知',style: optionStyle,),
-                  ],
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('最新通知',style: optionStyle,),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('健康諮詢',style: optionStyle),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('聊天',style: optionStyle),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('風險預防',style: optionStyle),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('我的報告',style: optionStyle),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: Center(
-                  child: Text('相關設備',style: optionStyle),
-                ),
-              ),
-              Container(
-                decoration: testDecor,
-                child: const Center(
-                  child: Text('Coming Soon!',style: optionStyle,textAlign: TextAlign.center,),
-                ),
-              ),
-              /*add more by the number of functions*/
-            ],
+    CustomScrollView(
+      slivers: <Widget> [
+        SliverGrid(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Container(
+                alignment: Alignment.center,
+                child: Text(index.toString()),
+              );
+            },
+            childCount: 16,
           ),
         ),
-      ),
+      ],
+    //   child: SafeArea(
+    //     child: SizedBox(
+    //       child: GridView.count(/*it is able Scroll down if fill the Screen*/
+    //         crossAxisCount: 3,//make it two Column
+    //         padding: const EdgeInsets.all(30),//Edge space
+    //         /*Space Between them(間隔GAP)*/
+    //         mainAxisSpacing: 20,//Y-Axis上下
+    //         crossAxisSpacing: 20,//X-Axis左右
+    //         children: [
+    //           Container(
+    //             padding: const EdgeInsets.all(8),
+    //             child: Column(
+    //               children: [
+    //                 Image.asset('lib/asset/healthcare.png',),
+    //                 Text('最新通知',),
+    //               ],
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('最新通知',style: optionStyle,),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('健康諮詢',style: optionStyle),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('聊天',style: optionStyle),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('風險預防',style: optionStyle),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('我的報告',style: optionStyle),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: Center(
+    //               child: Text('相關設備',style: optionStyle),
+    //             ),
+    //           ),
+    //           Container(
+    //             decoration: testDecor,
+    //             child: const Center(
+    //               child: Text('Coming Soon!',style: optionStyle,textAlign: TextAlign.center,),
+    //             ),
+    //           ),
+    //           /*add more by the number of functions*/
+    //         ],
+    //       ),
+    //     ),
+    //   ),
     ),
     /*主頁*/
     Column(
@@ -143,7 +163,7 @@ class _HomeStateful extends State<HomeScreen> {
               leading: Icon(Icons.settings_accessibility_sharp),
               title: Text("系統個人化設定"),
               onTap: (){//-->SystemValue()
-                },
+              },
             ),
             Divider(thickness: 2,),
             ListTile(
