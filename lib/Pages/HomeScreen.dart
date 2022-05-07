@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
-import 'ForgotPasswordPage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //main()==>HomeScreen()
@@ -12,124 +11,99 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeStateful extends State<HomeScreen> {
   //check State of availability
-  int _selectedIndex = 0;
-  // int _selectedIndex = 1;//注:此數字不可存在於超出(Screens、NavigationBar)最大數-1[like index of Array]
+  // int _selectedIndex = 0;
+  int _selectedIndex = 1;//注:此數字不可存在於超出(Screens、NavigationBar)最大數-1[like index of Array]
   // int _selectedIndex = 2;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  //統一字體美工(for now)
-  static const TextStyle optionStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
-  static BoxDecoration testDecor = BoxDecoration(color: Colors.black12/*, border: Border.all(color: Colors.purple, width: 1.0,)*/,);
-
+  
   //Bodys(配合底部導覽進行轉換)
   final Screens = [ /*Normal widget or Pages()*/
     // ForgotPage(),// test
     /*記錄*/
-    CustomScrollView(
-      slivers: <Widget> [
-        SliverGrid(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
+    Container(
+      child: Padding(
+        padding: EdgeInsets.all(30),//20 for crossAxisCount=3//30 for crossAxisCount=2
+        child: GridView(//View menuItem() @ bottom of this file
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,//3格寬太小
+            mainAxisSpacing: 20,crossAxisSpacing: 20,
           ),
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Container(
-                alignment: Alignment.center,
-                child: Text(index.toString()),
-              );
-            },
-            childCount: 16,
-          ),
+          children: [
+            menuItem(imagePath: 'lib/asset/health_Pills.jpg', ItemData: '藥品',),
+            menuItem(imagePath: 'lib/asset/diet_period.jpg', ItemData: '每日飲食',),
+            menuItem(imagePath: 'lib/asset/health_Heart_pulse.jpg', ItemData: '生命跡象',),
+            menuItem(imagePath: 'lib/asset/diet_water.jpg', ItemData: '水分攝取',),
+            menuItem(imagePath: 'lib/asset/health_special.jpg', ItemData: '!?!?!?!',),
+            menuItem(imagePath: 'lib/asset/diet_daily.jpg', ItemData: '?????',),
+            menuItem(imagePath: 'lib/asset/diet_calories.jpg', ItemData: '熱量',),
+            menuItem(imagePath: 'lib/asset/diet_special.jpg', ItemData: '健康養分',),
+            menuItem(imagePath: 'lib/asset/healthcare.png', ItemData: 'Coming Soon!',),
+            /*add more by the number of functions*/
+          ],
         ),
-      ],
-    //   child: SafeArea(
-    //     child: SizedBox(
-    //       child: GridView.count(/*it is able Scroll down if fill the Screen*/
-    //         crossAxisCount: 3,//make it two Column
-    //         padding: const EdgeInsets.all(30),//Edge space
-    //         /*Space Between them(間隔GAP)*/
-    //         mainAxisSpacing: 20,//Y-Axis上下
-    //         crossAxisSpacing: 20,//X-Axis左右
-    //         children: [
-    //           Container(
-    //             padding: const EdgeInsets.all(8),
-    //             child: Column(
-    //               children: [
-    //                 Image.asset('lib/asset/healthcare.png',),
-    //                 Text('最新通知',),
-    //               ],
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('最新通知',style: optionStyle,),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('健康諮詢',style: optionStyle),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('聊天',style: optionStyle),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('風險預防',style: optionStyle),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('我的報告',style: optionStyle),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: Center(
-    //               child: Text('相關設備',style: optionStyle),
-    //             ),
-    //           ),
-    //           Container(
-    //             decoration: testDecor,
-    //             child: const Center(
-    //               child: Text('Coming Soon!',style: optionStyle,textAlign: TextAlign.center,),
-    //             ),
-    //           ),
-    //           /*add more by the number of functions*/
-    //         ],
-    //       ),
-    //     ),
-    //   ),
+      ),
     ),
     /*主頁*/
-    Column(
-      children: [
-        Positioned(height: 100,child: Text('健康報告',style: TextStyle(fontSize: 30),),),
-        Positioned(child: Text('最新消息',style: TextStyle(fontSize: 30),),),
-      ],
+    Container(
+      padding: EdgeInsets.all(50),
+      decoration: BoxDecoration(//PageWidget(Container)背景
+        gradient: LinearGradient(//漸層色
+          colors: [
+            Colors.orange,//begin
+            Colors.deepOrangeAccent,
+            Colors.redAccent,
+            Colors.blueAccent.shade400,
+            Colors.lightBlueAccent, //end
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+      ),
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Text('最新消息',style: TextStyle(fontSize: 30),),
+              // child: Positioned(height: 100,child: Text('健康報告',style: TextStyle(fontSize: 30),),),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topRight, end: Alignment.bottomLeft,
+                  colors: [Colors.white24,Colors.white60],//glass?
+                ),
+              ),
+            ),
+            SizedBox(height: 100,),
+            Container(
+              padding: EdgeInsets.all(10),
+              // child: Positioned(child: Text('最新消息',style: TextStyle(fontSize: 30),),),
+              child: Text('健康報告',style: TextStyle(fontSize: 30),),
+              decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent.withOpacity(0.4)//Always <=1
+              ),
+            ),
+          ],
+        ),
+      )
     ),
+
     /*健康*/
     Center(child: Text('HEALTH I don\'t care!!',style: TextStyle(fontSize: 30),),),
   ];
 
-  /*再寫一個(for 美工)*/
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;//當前登入帳戶for info
     return Scaffold(
-      backgroundColor: Colors.amber,
+      backgroundColor: Color.fromRGBO(120, 60, 40, 60),
       key: _scaffoldKey,
       body: Stack(
         children: [
           Screens[_selectedIndex],
           IconButton(//show SideBar without (TOP)AppBar
+            alignment: Alignment.bottomRight,
             icon: Icon(Icons.menu,color: Colors.black,),
             onPressed: () => _scaffoldKey.currentState?.openDrawer(),
           ),
@@ -189,12 +163,11 @@ class _HomeStateful extends State<HomeScreen> {
         ),
       ),
 
-      /*origin*/
       bottomNavigationBar: NavigationBarTheme(//底部導覽
         data: NavigationBarThemeData(
           height: 75,
           backgroundColor: Colors.transparent,
-          indicatorColor: Color.fromRGBO(35,181,211,100),//shade50~900//淺色到深色
+          indicatorColor: Color(0xFF23b5d3).withOpacity(0.65),//shade50~900//淺色到深色
           // iconTheme: MaterialStateProperty.all(Icon),
           labelTextStyle: MaterialStateProperty.all(TextStyle(fontSize: 25),),
         ),
@@ -222,6 +195,43 @@ class _HomeStateful extends State<HomeScreen> {
               label: '健康',
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+//記錄方式
+class menuItem extends StatelessWidget {
+  final String imagePath;
+  final String ItemData;
+  // route
+  menuItem({required this.imagePath, required this.ItemData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        // color: Colors.transparent,
+        color: Colors.white,
+        child: OutlinedButton(
+          onPressed: () {},//navigator-->otherPage
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset('$imagePath'),
+              Text(
+                '$ItemData',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
