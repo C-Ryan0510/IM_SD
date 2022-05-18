@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class mainHome extends StatefulWidget {
   const mainHome({Key? key}) : super(key: key);
@@ -9,66 +8,66 @@ class mainHome extends StatefulWidget {
 }
 
 class _mainHomeState extends State<mainHome> {
+
+  greeting() {
+    var hour = DateTime.now().hour;
+    if (hour < 12) {
+      return '早上好!';
+    }
+    if (hour < 17) {
+      return '安逸午後';
+    }
+    return '晚上好';
+  }
   final _BannerController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.white,);
-      // showMaterialModalBottomSheet<void>(
-      // expand: true,
-      // context: context,
-      //   builder: (BuildContext context) {
-      //     return Container(
-      //       height: 200,
-      //       color: Colors.amber,
-      //       child: Center(
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.center,
-      //           mainAxisSize: MainAxisSize.min,
-      //           children: <Widget>[
-      //             const Text('Modal BottomSheet'),
-      //             ElevatedButton(
-      //               child: const Text('Close BottomSheet'),
-      //               onPressed: () => Navigator.pop(context),
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     );
-      //   },
-
-    //   Column(
-    //   mainAxisAlignment: MainAxisAlignment.end,
-    //   children: <Widget>[
-    //     Positioned(child: Text('Greeting',style: TextStyle(fontSize: 36),),/*greetingText()*/top: 20,),
-    //     SizedBox(height: 10,),//
-    //     Stack(
-    //         children: [
-    //           Positioned(child: Text('最新消息?',style: TextStyle(fontSize: 24),),left: 10,),
-    //           Container(
-    //             height: 400,
-    //             width: double.infinity,
-    //             decoration: BoxDecoration(
-    //               // border: BorderSide(color: Colors.white,width: 10),
-    //               borderRadius: BorderRadius.circular(10),
-    //               color: Colors.purpleAccent.withOpacity(0.3),
-    //             ),
-    //             padding: EdgeInsets.only(top: 40,left: 15,right: 15),
-    //             child: ListWheelScrollView(
-    //               itemExtent: 200,
-    //               diameterRatio: 0.1,
-    //               // useMagnifier: true,
-    //               magnification: 5,
-    //               children: [
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue.withOpacity(0.1),
-    //                   ),
-    //                   child: Text('Test1',),
-    //                 ),
-    //                 SizedBox(height: 10,),
+    return Stack(
+      children: [
+        Center(child:Text(greeting(),style: TextStyle(fontSize: 50),),),
+        Container(color: Colors.white.withOpacity(0.5),),
+        SizedBox.expand(/*news*/
+          child: DraggableScrollableSheet(
+            initialChildSize: 0.8,
+            maxChildSize: 0.93,
+            minChildSize: 0.055,
+            builder: (BuildContext context, ScrollController scrollController) {
+              return Container(
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15),),
+                ),
+                child: Stack(
+                  children: [
+                    ListView.builder(
+                      padding: EdgeInsets.only(top:25,left: 10,right: 10),
+                      controller: scrollController,
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: EdgeInsets.all(5),
+                          child: Container(
+                            child: Text('$index'+'News'),
+                            padding: EdgeInsets.all(10),
+                            height: 100,
+                            decoration:BoxDecoration(
+                                color: Colors.blue[100],
+                                borderRadius: BorderRadius.circular(10)
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+        )
+      ],
+    );
     //                 Stack(
     //                   children: [
     //                     Positioned(child: Text('最新消息?',style: TextStyle(fontSize: 24),),left: 10,),
@@ -90,66 +89,6 @@ class _mainHomeState extends State<mainHome> {
     //                             _newsItems(text: 'three', imagePath: 'lib/asset/Coming_Soon.jpg'),
     //                             _newsItems(text: 'Coming Soon', imagePath: 'lib/asset/Coming_Soon.jpg'),
     //                           ],
-    //                         ),
-    //                       ),
-    //                     ),
-    //                   ],
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue.withOpacity(0.3),
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue.withOpacity(0.5),
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue.withOpacity(0.7),
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue,
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue,
-    //                   ),
-    //                 ),
-    //                 SizedBox(height: 10,),
-    //                 Container(
-    //                   height: 100,
-    //                   decoration: BoxDecoration(
-    //                     borderRadius: BorderRadius.circular(20),
-    //                     color: Colors.blue,
-    //                   ),
-    //                 ),
-    //               ],
-    //             ),
-    //           ),
-    //         ]
-    //     ),
-    //   ],
-    // );
   }
 }
 
