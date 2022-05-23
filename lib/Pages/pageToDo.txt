@@ -8,8 +8,17 @@ MainScreen                 (!)
                             |         |--->loginPage<===>registerPage
                             |                |
                             |--->HomePage<==>|
+                                    |        |
+                                    |        |<=>ForgotPasswordPage
+                                    |
+                                    |        |<==AccountManagement
+                                    |        |
+                                    |=======>|<==
                                              |
-                                             |<=>ForgotPasswordPage
+                                             |<==
+
+
+
 
 
 Page to Code:
