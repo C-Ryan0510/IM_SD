@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:untitled/Pages/accountManagement.dart';
 import 'package:untitled/homePageModel/healthScreen.dart';
 import 'package:untitled/homePageModel/mainHomeScreen.dart';
 import 'package:untitled/homePageModel/recordScreen.dart';
@@ -19,17 +20,6 @@ class _HomeStateful extends State<HomeScreen> {
   // int _selectedIndexBN = 2;
 
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  greeting() {
-    var hour = DateTime.now().hour;
-    if (hour < 12) {
-      return 'Morning';
-    }
-    if (hour < 17) {
-      return 'Afternoon';
-    }
-    return 'Evening';
-  }
 
   @override
   void initState() {
@@ -108,15 +98,15 @@ class _HomeStateful extends State<HomeScreen> {
             Divider(thickness: 30,),//thicc
             ListTile(/*當此為範例Ctrl+C&Ctrl+V*/
               leading: Icon(Icons.account_circle),
-              title: Text("帳戶管理"),
-              onTap: (){//-->AccManagement()
-                // Navigator.push(context,route); or // Page(),
-              },
+              title: Text("個人和帳戶管理"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ManageAccount(),//to Forgot()
+              )),
             ),
             Divider(thickness: 2,),
             ListTile(
               leading: Icon(Icons.settings_accessibility_sharp),
-              title: Text("系統個人化設定"),
+              title: Text("系統設定"),
               onTap: (){//-->SystemValue()
               },
             ),
@@ -139,7 +129,6 @@ class _HomeStateful extends State<HomeScreen> {
               onTap: (){},
             ),
             Divider(thickness: 2,),
-            /*...add more*/
           ],
         ),
       ),
